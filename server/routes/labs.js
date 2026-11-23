@@ -27,6 +27,7 @@ router.get('/orders', verifyToken, authorizeRoles('LAB_TECH'), async (req, res) 
 });
 
 // POST /api/labs/results - Lab tech submits test results (Trigger auto-completes order & logs audit)
+// POST /api/labs/results - Lab technician verifies & submits test results
 router.post('/results', verifyToken, authorizeRoles('LAB_TECH'), async (req, res) => {
   const { order_id, metrics, remarks } = req.body;
 
@@ -34,21 +35,31 @@ router.post('/results', verifyToken, authorizeRoles('LAB_TECH'), async (req, res
     return res.status(400).json({ message: 'Order ID and test metrics are required.' });
   }
 
+  const connection = await pool.getConnection();
+
   try {
-    const [result] = await pool.query(
+    await connection.beginTransaction();
+
+    // 1. Insert verified lab result
+    await connection.query(
       'INSERT INTO lab_results (order_id, tech_id, metrics, remarks) VALUES (?, ?, ?, ?)',
-      [order_id, req.user.userId, JSON.stringify(metrics), remarks || 'Verified within lab standards']
+      [order_id, req.user.userId, JSON.stringify(metrics), remarks || '']
     );
 
-    res.status(201).json({
-      message: 'Lab result submitted and verified!',
-      resultId: result.insertId
-    });
+    // 2. Mark lab order as COMPLETED (replaces MySQL trigger for TiDB Cloud)
+    await connection.query(
+      "UPDATE lab_orders SET status = 'COMPLETED' WHERE order_id = ?",
+      [order_id]
+    );
+
+    await connection.commit();
+    res.status(201).json({ message: 'Lab result verified and published!' });
   } catch (err) {
-    if (err.code === 'ER_DUP_ENTRY') {
-      return res.status(409).json({ message: 'Results have already been submitted for this order.' });
-    }
-    res.status(500).json({ message: 'Failed to submit lab result', error: err.message });
+    await connection.rollback();
+    console.error('Lab result submit error:', err);
+    res.status(500).json({ message: `Failed to publish lab result: ${err.message}` });
+  } finally {
+    connection.release();
   }
 });
 
