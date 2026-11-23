@@ -12,11 +12,12 @@
   }
 
   h1, h2 {
-    font-family: "Story Script", sans-serif;
+    font-family: "Castoro Titling", serif;
     font-weight: 400 !important;
     font-synthesis: none;
     font-style: normal;
-    line-height: 1.15;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
   }
 
   h3, h4 {

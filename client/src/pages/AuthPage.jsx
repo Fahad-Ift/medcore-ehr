@@ -1,15 +1,5 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Activity,
-  UserPlus,
-  LogIn,
-  ShieldCheck,
-  CalendarCheck,
-  FileSpreadsheet,
-  FlaskConical,
-  Info
-} from 'lucide-react';
 import API from '../api';
 
 export default function AuthPage({ setUser }) {
@@ -88,7 +78,7 @@ export default function AuthPage({ setUser }) {
 
   return (
     <div className="min-h-screen bg-[#FAFAFD] text-[#122056] flex flex-col lg:flex-row">
-      {/* Left Column: Deep Navy (#122056) Hospital Panel & Step-by-Step Guide */}
+      {/* Left Column */}
       <div className="lg:w-1/2 bg-[#122056] text-white p-8 lg:p-14 flex flex-col justify-between relative overflow-hidden">
         <img
           src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=1400&q=80"
@@ -97,51 +87,31 @@ export default function AuthPage({ setUser }) {
         />
 
         <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="p-2.5 bg-[#5B65DC] rounded-xl text-white shadow-md">
-              <Activity className="w-6 h-6" />
-            </div>
-            <div>
-              <h1 className="text-xl font-bold tracking-tight text-white">MedCore Health Portal</h1>
-              <p className="text-xs text-[#EEEFFD]/80">Integrated Electronic Health Record System</p>
-            </div>
+          <div className="mb-8">
+            <h1 className="text-xl tracking-tight text-white">MedCore Health Portal</h1>
+            <p className="text-xs text-[#EEEFFD]/80 mt-0.5">Integrated Electronic Health Record System</p>
           </div>
 
-          <h2 className="text-3xl lg:text-4xl font-bold leading-tight mb-4">
+          <h2 className="text-3xl lg:text-4xl leading-tight mb-4">
             Seamless clinical care for patients, doctors, and diagnostic labs.
           </h2>
           <p className="text-[#EEEFFD]/85 text-sm max-w-lg leading-relaxed mb-8">
             Schedule specialist visits, issue verified digital prescriptions, and view structured lab reports in one unified platform.
           </p>
 
-          {/* How to Use Guide */}
-          <div className=" backdrop-blur-md border border-white/15 rounded-2xl p-6 space-y-4 max-w-lg">
-            <p className="text-xs font-bold uppercase tracking-wider text-[#EEEFFD]">
+          {/* Step-by-Step Guide */}
+          <div className="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-6 space-y-4 max-w-lg">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[#EEEFFD]">
               How to Use MedCore — Step-by-Step Guide
             </p>
-            <div className="flex items-start gap-3">
-              <div className="p-1.5 rounded-lg bg-[#5B65DC]/30 text-[#EEEFFD] shrink-0 mt-0.5">
-                <CalendarCheck className="w-4 h-4" />
-              </div>
-              <div className="text-xs leading-relaxed text-[#EEEFFD]/95">
-                <strong>Step 1 — Create an Account or Try a Demo:</strong> Click <em>Create Account</em> on the right to register as a Patient, Doctor, or Lab Tech, or click any of the 3 instant demo buttons at the bottom.
-              </div>
+            <div className="text-xs leading-relaxed text-[#EEEFFD]/95">
+              <strong>Step 1 — Create an Account or Try a Demo:</strong> Click <em>Create Account</em> on the right to register as a Patient, Doctor, or Lab Tech, or click any of the 3 instant demo buttons at the bottom.
             </div>
-            <div className="flex items-start gap-3">
-              <div className="p-1.5 rounded-lg bg-[#5B65DC]/30 text-[#EEEFFD] shrink-0 mt-0.5">
-                <FileSpreadsheet className="w-4 h-4" />
-              </div>
-              <div className="text-xs leading-relaxed text-[#EEEFFD]/95">
-                <strong>Step 2 — Book a Doctor &amp; Consult:</strong> Patients choose a specialist card and time slot; Doctors record vitals, ICD-10 diagnosis, and prescriptions.
-              </div>
+            <div className="text-xs leading-relaxed text-[#EEEFFD]/95">
+              <strong>Step 2 — Book a Doctor &amp; Consult:</strong> Patients choose a specialist card and time slot; Doctors record vitals, ICD-10 diagnosis, and prescriptions.
             </div>
-            <div className="flex items-start gap-3">
-              <div className="p-1.5 rounded-lg bg-[#5B65DC]/30 text-[#EEEFFD] shrink-0 mt-0.5">
-                <FlaskConical className="w-4 h-4" />
-              </div>
-              <div className="text-xs leading-relaxed text-[#EEEFFD]/95">
-                <strong>Step 3 — Process Lab Reports:</strong> Lab Technicians enter test results that immediately unlock inside the patient&apos;s medical wallet.
-              </div>
+            <div className="text-xs leading-relaxed text-[#EEEFFD]/95">
+              <strong>Step 3 — Process Lab Reports:</strong> Lab Technicians enter test results that immediately unlock inside the patient&apos;s medical wallet.
             </div>
           </div>
         </div>
@@ -151,11 +121,11 @@ export default function AuthPage({ setUser }) {
         </p>
       </div>
 
-      {/* Right Column: Pure White (#FFFFFF) Authentication Card */}
+      {/* Right Column */}
       <div className="lg:w-1/2 flex items-center justify-center p-6 lg:p-12">
         <div className="max-w-md w-full bg-white border border-[#EEEFFD] rounded-2xl p-8 shadow-lg shadow-[#122056]/5">
           <div className="mb-6">
-            <h2 className="text-2xl font-bold text-[#122056]">
+            <h2 className="text-2xl text-[#122056]">
               {isLogin ? 'Sign in to your account' : 'Create a new account'}
             </h2>
             <p className="text-sm text-[#122056]/70 mt-1">
@@ -165,29 +135,29 @@ export default function AuthPage({ setUser }) {
             </p>
           </div>
 
-          {/* Toggle Tabs (#EEEFFD secondary pill) */}
+          {/* Toggle Tabs */}
           <div className="grid grid-cols-2 gap-1.5 bg-[#EEEFFD] p-1 rounded-xl mb-6">
             <button
               type="button"
               onClick={() => { setIsLogin(true); setError(''); setSuccessMsg(''); }}
-              className={`py-2 text-sm font-semibold rounded-lg flex items-center justify-center gap-2 transition cursor-pointer ${
+              className={`py-2 text-sm font-semibold rounded-lg transition cursor-pointer ${
                 isLogin
                   ? 'bg-white text-[#122056] shadow-xs'
                   : 'text-[#122056]/70 hover:text-[#122056]'
               }`}
             >
-              <LogIn className="w-4 h-4 text-[#5B65DC]" /> Sign In
+              Sign In
             </button>
             <button
               type="button"
               onClick={() => { setIsLogin(false); setError(''); setSuccessMsg(''); }}
-              className={`py-2 text-sm font-semibold rounded-lg flex items-center justify-center gap-2 transition cursor-pointer ${
+              className={`py-2 text-sm font-semibold rounded-lg transition cursor-pointer ${
                 !isLogin
                   ? 'bg-white text-[#122056] shadow-xs'
                   : 'text-[#122056]/70 hover:text-[#122056]'
               }`}
             >
-              <UserPlus className="w-4 h-4 text-[#5B65DC]" /> Create Account
+              Create Account
             </button>
           </div>
 
@@ -207,7 +177,7 @@ export default function AuthPage({ setUser }) {
             {!isLogin && (
               <>
                 <div>
-                  <label className="block text-xs font-bold text-[#122056] mb-1">
+                  <label className="block text-xs font-semibold text-[#122056] mb-1">
                     1. Choose Your Account Role
                   </label>
                   <select
@@ -223,7 +193,7 @@ export default function AuthPage({ setUser }) {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-[#122056] mb-1">
+                  <label className="block text-xs font-semibold text-[#122056] mb-1">
                     2. Enter Your Full Name
                   </label>
                   <input
@@ -239,7 +209,7 @@ export default function AuthPage({ setUser }) {
             )}
 
             <div>
-              <label className="block text-xs font-bold text-[#122056] mb-1">
+              <label className="block text-xs font-semibold text-[#122056] mb-1">
                 {!isLogin ? '3. Email & Password' : 'Email Address'}
               </label>
               <input
@@ -255,7 +225,7 @@ export default function AuthPage({ setUser }) {
 
             <div>
               {isLogin && (
-                <label className="block text-xs font-bold text-[#122056] mb-1">
+                <label className="block text-xs font-semibold text-[#122056] mb-1">
                   Password
                 </label>
               )}
@@ -272,8 +242,8 @@ export default function AuthPage({ setUser }) {
 
             {!isLogin && form.role === 'PATIENT' && (
               <div className="bg-[#EEEFFD]/70 border border-[#5B65DC]/20 rounded-xl p-3.5 space-y-3">
-                <p className="text-xs font-bold text-[#122056] flex items-center gap-1.5">
-                  <Info className="w-3.5 h-3.5 text-[#5B65DC]" /> Patient Medical Details
+                <p className="text-xs font-semibold text-[#122056]">
+                  Patient Medical Details
                 </p>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
@@ -306,8 +276,8 @@ export default function AuthPage({ setUser }) {
 
             {!isLogin && form.role === 'DOCTOR' && (
               <div className="bg-[#EEEFFD]/70 border border-[#5B65DC]/20 rounded-xl p-3.5 space-y-3">
-                <p className="text-xs font-bold text-[#122056] flex items-center gap-1.5">
-                  <Info className="w-3.5 h-3.5 text-[#5B65DC]" /> Physician Verification
+                <p className="text-xs font-semibold text-[#122056]">
+                  Physician Verification
                 </p>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
@@ -328,8 +298,8 @@ export default function AuthPage({ setUser }) {
 
             {!isLogin && form.role === 'LAB_TECH' && (
               <div className="bg-[#EEEFFD]/70 border border-[#5B65DC]/20 rounded-xl p-3.5 space-y-3">
-                <p className="text-xs font-bold text-[#122056] flex items-center gap-1.5">
-                  <Info className="w-3.5 h-3.5 text-[#5B65DC]" /> Laboratory Verification
+                <p className="text-xs font-semibold text-[#122056]">
+                  Laboratory Verification
                 </p>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
@@ -355,8 +325,8 @@ export default function AuthPage({ setUser }) {
 
           {/* 1-Click Demo Logins */}
           <div className="mt-6 pt-5 border-t border-[#EEEFFD]">
-            <p className="text-xs font-bold text-[#122056] mb-2.5 flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-[#5B65DC]" /> Instant 1-Click Demo Roles
+            <p className="text-xs font-semibold text-[#122056] mb-2.5">
+              Instant 1-Click Demo Roles
             </p>
             <div className="grid grid-cols-3 gap-2">
               <button
