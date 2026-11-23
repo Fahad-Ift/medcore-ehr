@@ -72,7 +72,10 @@ router.post('/consult', verifyToken, authorizeRoles('DOCTOR'), async (req, res) 
     res.status(201).json({ message: 'Consultation recorded successfully!', recordId });
   } catch (err) {
     await connection.rollback();
-    res.status(500).json({ message: 'Failed to save consultation', error: err.message });
+    console.error('Consult save error:', err);
+    res.status(500).json({
+      message: `Failed to save consultation: ${err.message}`
+    });
   } finally {
     connection.release();
   }
