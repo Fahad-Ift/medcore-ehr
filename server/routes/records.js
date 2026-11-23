@@ -34,7 +34,7 @@ router.post('/consult', verifyToken, authorizeRoles('DOCTOR'), async (req, res) 
       throw new Error('Appointment not found or unauthorized.');
     }
 
-    // 1. Insert Medical Record (Trigger automatically updates appointment status & writes audit_logs)
+    // 1. Insert Medical Record
     const [recResult] = await connection.query(
       'INSERT INTO medical_records (appointment_id, diagnosis_code, diagnosis_title, doctor_notes, vitals) VALUES (?, ?, ?, ?, ?)',
       [appointment_id, diagnosis_code, diagnosis_title, doctor_notes, JSON.stringify(vitals || {})]
@@ -67,6 +67,12 @@ router.post('/consult', verifyToken, authorizeRoles('DOCTOR'), async (req, res) 
         );
       }
     }
+
+    // 4. Mark appointment as COMPLETED (replaces MySQL trigger for TiDB Cloud)
+    await connection.query(
+      "UPDATE appointments SET status = 'COMPLETED' WHERE appointment_id = ?",
+      [appointment_id]
+    );
 
     await connection.commit();
     res.status(201).json({ message: 'Consultation recorded successfully!', recordId });
