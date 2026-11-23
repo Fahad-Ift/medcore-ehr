@@ -1,14 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Activity,
-  Stethoscope,
-  LogOut,
-  CheckCircle2,
-  ClipboardList,
-  Pill,
-  FlaskConical,
-  Info
-} from 'lucide-react';
+import { LogOut, CheckCircle2 } from 'lucide-react';
 import API from '../api';
 
 export default function DoctorDashboard({ user, onLogout }) {
@@ -94,30 +85,23 @@ export default function DoctorDashboard({ user, onLogout }) {
 
   return (
     <div className="min-h-screen bg-[#FAFAFD] text-[#122056]">
-      {/* Pure White Top Navigation Bar */}
       <header className="bg-white border-b border-[#EEEFFD] px-6 py-4 sticky top-0 z-20">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-[#5B65DC] rounded-xl text-white">
-              <Activity className="w-5 h-5" />
-            </div>
-            <div>
-              <h1 className="text-base font-bold text-[#122056]">MedCore Physician Workspace</h1>
-              <p className="text-xs text-[#122056]/65">Logged in as {user.name}</p>
-            </div>
+          <div>
+            <h1 className="text-lg text-[#122056]">MedCore Physician Workspace</h1>
+            <p className="text-xs text-[#122056]/65">Logged in as {user.name}</p>
           </div>
 
           <button
             onClick={onLogout}
             className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#EEEFFD] hover:bg-[#5B65DC] text-[#122056] hover:text-white text-xs font-semibold transition cursor-pointer"
           >
-            <LogOut className="w-4 h-4" /> Sign Out
+            <LogOut className="w-3.5 h-3.5" /> Sign Out
           </button>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto p-6 space-y-6">
-        {/* Physician Banner with Portrait & How-To Guide */}
         <section className="bg-[#122056] text-white rounded-2xl p-6 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4">
             <img
@@ -126,10 +110,10 @@ export default function DoctorDashboard({ user, onLogout }) {
               className="w-16 h-16 rounded-2xl object-cover border-2 border-[#5B65DC] shrink-0"
             />
             <div>
-              <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#5B65DC] text-white text-xs font-bold mb-1">
+              <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#5B65DC] text-white text-xs font-semibold mb-1">
                 Clinical Consultation Desk
               </span>
-              <h2 className="text-xl font-bold">Welcome, {user.name}</h2>
+              <h2 className="text-xl">Welcome, {user.name}</h2>
               <p className="text-xs text-[#EEEFFD]/80 mt-0.5">
                 Step 1: Click <strong>Start Consult</strong> on any scheduled patient below. Step 2: Enter vitals, diagnosis, prescription, or lab orders and click Save.
               </p>
@@ -137,7 +121,7 @@ export default function DoctorDashboard({ user, onLogout }) {
           </div>
 
           <div className="bg-white/10 border border-white/15 rounded-xl px-4 py-3 text-xs text-[#EEEFFD] shrink-0">
-            <p className="font-bold">Atomic Record Sync</p>
+            <p className="font-semibold">Atomic Record Sync</p>
             <p className="text-[#EEEFFD]/75 mt-0.5">
               Saving a consultation updates the patient&apos;s wallet and dispatches lab tests in one transaction.
             </p>
@@ -157,12 +141,9 @@ export default function DoctorDashboard({ user, onLogout }) {
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Left Column: Patient Appointments Queue (5 cols) */}
           <section className="lg:col-span-5 bg-white border border-[#EEEFFD] rounded-2xl p-6 shadow-xs h-fit">
             <div className="mb-4">
-              <h2 className="text-base font-bold text-[#122056] flex items-center gap-2">
-                <Stethoscope className="w-5 h-5 text-[#5B65DC]" /> Patient Queue
-              </h2>
+              <h2 className="text-base text-[#122056]">Patient Queue</h2>
               <p className="text-xs text-[#122056]/65 mt-0.5">
                 Select a scheduled patient to open their clinical chart.
               </p>
@@ -182,10 +163,10 @@ export default function DoctorDashboard({ user, onLogout }) {
                   >
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
-                        <h3 className="font-bold text-sm text-[#122056] truncate">
+                        <h3 className="font-semibold text-sm text-[#122056] truncate">
                           {appt.patient_name}
                         </h3>
-                        <span className="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 border border-rose-200 text-xs font-bold">
+                        <span className="px-2 py-0.5 rounded-md bg-rose-50 text-rose-700 border border-rose-200 text-xs font-semibold">
                           {appt.blood_group}
                         </span>
                       </div>
@@ -205,7 +186,7 @@ export default function DoctorDashboard({ user, onLogout }) {
                         Start Consult
                       </button>
                     ) : (
-                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-bold shrink-0">
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold shrink-0">
                         <CheckCircle2 className="w-3.5 h-3.5" /> Done
                       </span>
                     )}
@@ -221,11 +202,9 @@ export default function DoctorDashboard({ user, onLogout }) {
             </div>
           </section>
 
-          {/* Right Column: Guided Consultation Form (7 cols) */}
           <section className="lg:col-span-7 bg-white border border-[#EEEFFD] rounded-2xl p-6 shadow-xs">
             <div className="border-b border-[#EEEFFD] pb-4 mb-5">
-              <h2 className="text-base font-bold text-[#122056] flex items-center gap-2">
-                <ClipboardList className="w-5 h-5 text-[#5B65DC]" />
+              <h2 className="text-base text-[#122056]">
                 {selectedAppt
                   ? `Clinical Consultation: ${selectedAppt.patient_name}`
                   : 'Clinical Consultation Chart'}
@@ -239,9 +218,8 @@ export default function DoctorDashboard({ user, onLogout }) {
 
             {selectedAppt ? (
               <form onSubmit={handleConsultSubmit} className="space-y-5">
-                {/* Section 1: Diagnosis & Vitals */}
                 <div className="bg-[#FAFAFD] border border-[#EEEFFD] rounded-2xl p-4 space-y-3">
-                  <p className="text-xs font-bold uppercase tracking-wider text-[#5B65DC]">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-[#5B65DC]">
                     1. Diagnosis &amp; Patient Vitals
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -318,10 +296,9 @@ export default function DoctorDashboard({ user, onLogout }) {
                   </div>
                 </div>
 
-                {/* Section 2: Digital Prescription */}
                 <div className="bg-[#FAFAFD] border border-[#EEEFFD] rounded-2xl p-4 space-y-3">
-                  <p className="text-xs font-bold uppercase tracking-wider text-[#5B65DC] flex items-center gap-1.5">
-                    <Pill className="w-4 h-4" /> 2. Digital Prescription (Optional)
+                  <p className="text-xs font-semibold uppercase tracking-wider text-[#5B65DC]">
+                    2. Digital Prescription (Optional)
                   </p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input
@@ -352,10 +329,9 @@ export default function DoctorDashboard({ user, onLogout }) {
                   </div>
                 </div>
 
-                {/* Section 3: Order Diagnostic Lab Test */}
                 <div className="bg-[#FAFAFD] border border-[#EEEFFD] rounded-2xl p-4 space-y-2">
-                  <p className="text-xs font-bold uppercase tracking-wider text-[#5B65DC] flex items-center gap-1.5">
-                    <FlaskConical className="w-4 h-4" /> 3. Order Diagnostic Lab Test (Optional)
+                  <p className="text-xs font-semibold uppercase tracking-wider text-[#5B65DC]">
+                    3. Order Diagnostic Lab Test (Optional)
                   </p>
                   <input
                     placeholder="e.g. Complete Blood Count (CBC) or Lipid Profile"
@@ -374,8 +350,7 @@ export default function DoctorDashboard({ user, onLogout }) {
               </form>
             ) : (
               <div className="bg-[#EEEFFD]/50 border border-[#EEEFFD] rounded-2xl p-8 text-center space-y-2">
-                <Info className="w-7 h-7 text-[#5B65DC] mx-auto" />
-                <p className="text-sm font-bold text-[#122056]">No Patient Selected Yet</p>
+                <p className="text-sm font-semibold text-[#122056]">No Patient Selected Yet</p>
                 <p className="text-xs text-[#122056]/70 max-w-md mx-auto leading-relaxed">
                   Click <strong>Start Consult</strong> next to any scheduled patient in the queue on the left to enter vitals, diagnosis, prescriptions, and lab requests.
                 </p>

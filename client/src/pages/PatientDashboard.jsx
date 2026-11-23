@@ -1,16 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Activity,
-  Calendar,
-  FileText,
-  FlaskConical,
-  ShieldCheck,
-  LogOut,
-  CheckCircle2,
-  Clock,
-  Info,
-  Stethoscope
-} from 'lucide-react';
+import { LogOut, CheckCircle2, Clock } from 'lucide-react';
 import API from '../api';
 
 const DOCTOR_AVATARS = [
@@ -77,36 +66,29 @@ export default function PatientDashboard({ user, onLogout }) {
 
   return (
     <div className="min-h-screen bg-[#FAFAFD] text-[#122056]">
-      {/* Pure White Top Navigation Bar */}
       <header className="bg-white border-b border-[#EEEFFD] px-6 py-4 sticky top-0 z-20">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-[#5B65DC] rounded-xl text-white">
-              <Activity className="w-5 h-5" />
-            </div>
-            <div>
-              <h1 className="text-base font-bold text-[#122056]">MedCore Patient Portal</h1>
-              <p className="text-xs text-[#122056]/65">Signed in as {user.name}</p>
-            </div>
+          <div>
+            <h1 className="text-lg text-[#122056]">MedCore Patient Portal</h1>
+            <p className="text-xs text-[#122056]/65">Signed in as {user.name}</p>
           </div>
 
           <button
             onClick={onLogout}
             className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#EEEFFD] hover:bg-[#5B65DC] text-[#122056] hover:text-white text-xs font-semibold transition cursor-pointer"
           >
-            <LogOut className="w-4 h-4" /> Sign Out
+            <LogOut className="w-3.5 h-3.5" /> Sign Out
           </button>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto p-6 space-y-8">
-        {/* Welcome & Quick How-To Banner */}
         <section className="bg-white border border-[#EEEFFD] rounded-2xl p-6 shadow-xs flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
           <div>
-            <span className="inline-block px-3 py-1 rounded-full bg-[#EEEFFD] text-[#5B65DC] text-xs font-bold mb-2">
+            <span className="inline-block px-3 py-1 rounded-full bg-[#EEEFFD] text-[#5B65DC] text-xs font-semibold mb-2">
               Patient Health Hub
             </span>
-            <h2 className="text-xl font-bold text-[#122056]">
+            <h2 className="text-xl text-[#122056]">
               Book a specialist or review your clinical records
             </h2>
             <p className="text-sm text-[#122056]/70 mt-1">
@@ -114,19 +96,16 @@ export default function PatientDashboard({ user, onLogout }) {
             </p>
           </div>
           <div className="bg-[#EEEFFD] rounded-xl p-3.5 text-xs text-[#122056] max-w-xs shrink-0">
-            <p className="font-bold flex items-center gap-1.5 mb-1">
-              <Info className="w-4 h-4 text-[#5B65DC]" /> Smart Slot Protection
-            </p>
+            <p className="font-semibold mb-1">Smart Slot Protection</p>
             <p className="text-[#122056]/80 leading-relaxed">
               Each doctor&apos;s time slot is locked once booked so two patients can never accidentally book the exact same time.
             </p>
           </div>
         </section>
 
-        {/* Guided 3-Step Appointment Booking */}
         <section className="bg-white border border-[#EEEFFD] rounded-2xl p-6 shadow-xs space-y-6">
           <div>
-            <h2 className="text-lg font-bold text-[#122056]">Schedule a New Appointment</h2>
+            <h2 className="text-lg text-[#122056]">Schedule a New Appointment</h2>
             <p className="text-xs text-[#122056]/65 mt-0.5">
               Complete all 3 steps below to reserve your consultation slot.
             </p>
@@ -144,9 +123,8 @@ export default function PatientDashboard({ user, onLogout }) {
             </div>
           )}
 
-          {/* Step 1: Clickable Doctor Cards with Portraits */}
           <div>
-            <p className="text-xs font-bold uppercase tracking-wider text-[#5B65DC] mb-3">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[#5B65DC] mb-3">
               Step 1 — Click a Doctor Card to Select Your Specialist
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -170,7 +148,7 @@ export default function PatientDashboard({ user, onLogout }) {
                     />
                     <div className="min-w-0">
                       <div className="flex items-center gap-1.5">
-                        <h3 className="font-bold text-sm text-[#122056] truncate">
+                        <h3 className="font-semibold text-sm text-[#122056] truncate">
                           {doc.full_name}
                         </h3>
                         {isSelected && (
@@ -188,10 +166,9 @@ export default function PatientDashboard({ user, onLogout }) {
             </div>
           </div>
 
-          {/* Steps 2 & 3: Date, Time & Reason Form */}
           <form onSubmit={handleBook} className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-2 border-t border-[#EEEFFD]">
             <div>
-              <label className="block text-xs font-bold text-[#122056] mb-1.5">
+              <label className="block text-xs font-semibold text-[#122056] mb-1.5">
                 Step 2a — Choose Date
               </label>
               <input
@@ -204,7 +181,7 @@ export default function PatientDashboard({ user, onLogout }) {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#122056] mb-1.5">
+              <label className="block text-xs font-semibold text-[#122056] mb-1.5">
                 Step 2b — Choose Time Slot
               </label>
               <select
@@ -221,7 +198,7 @@ export default function PatientDashboard({ user, onLogout }) {
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#122056] mb-1.5">
+              <label className="block text-xs font-semibold text-[#122056] mb-1.5">
                 Step 3 — Reason for Visit
               </label>
               <input
@@ -245,22 +222,17 @@ export default function PatientDashboard({ user, onLogout }) {
           </form>
         </section>
 
-        {/* My Appointments Table */}
         <section className="bg-white border border-[#EEEFFD] rounded-2xl p-6 shadow-xs">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h2 className="text-lg font-bold text-[#122056] flex items-center gap-2">
-                <Calendar className="w-5 h-5 text-[#5B65DC]" /> My Scheduled &amp; Past Appointments
-              </h2>
-              <p className="text-xs text-[#122056]/65 mt-0.5">
-                Track upcoming visits and completed consultations.
-              </p>
-            </div>
+          <div className="mb-4">
+            <h2 className="text-lg text-[#122056]">My Scheduled &amp; Past Appointments</h2>
+            <p className="text-xs text-[#122056]/65 mt-0.5">
+              Track upcoming visits and completed consultations.
+            </p>
           </div>
 
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
-              <thead className="bg-[#EEEFFD] text-xs font-bold text-[#122056]">
+              <thead className="bg-[#EEEFFD] text-xs font-semibold text-[#122056]">
                 <tr>
                   <th className="py-3 px-4 rounded-l-xl">Specialist</th>
                   <th className="py-3 px-4">Department</th>
@@ -272,7 +244,7 @@ export default function PatientDashboard({ user, onLogout }) {
               <tbody className="divide-y divide-[#EEEFFD]">
                 {appointments.map((a) => (
                   <tr key={a.appointment_id} className="hover:bg-[#FAFAFD]">
-                    <td className="py-3.5 px-4 font-bold text-[#122056]">{a.doctor_name}</td>
+                    <td className="py-3.5 px-4 font-semibold text-[#122056]">{a.doctor_name}</td>
                     <td className="py-3.5 px-4 text-[#122056]/75">{a.specialization}</td>
                     <td className="py-3.5 px-4 text-[#122056]">
                       {new Date(a.slot_date).toLocaleDateString()} • {a.slot_time}
@@ -280,7 +252,7 @@ export default function PatientDashboard({ user, onLogout }) {
                     <td className="py-3.5 px-4 text-[#122056]/80">{a.reason}</td>
                     <td className="py-3.5 px-4">
                       <span
-                        className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold ${
+                        className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold ${
                           a.status === 'COMPLETED'
                             ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                             : 'bg-[#EEEFFD] text-[#5B65DC]'
@@ -308,12 +280,9 @@ export default function PatientDashboard({ user, onLogout }) {
           </div>
         </section>
 
-        {/* Medical Records, Prescriptions & Lab Reports */}
         <section className="space-y-4">
           <div>
-            <h2 className="text-lg font-bold text-[#122056] flex items-center gap-2">
-              <FileText className="w-5 h-5 text-[#5B65DC]" /> Clinical Records, Prescriptions &amp; Lab Results
-            </h2>
+            <h2 className="text-lg text-[#122056]">Clinical Records, Prescriptions &amp; Lab Results</h2>
             <p className="text-xs text-[#122056]/65 mt-0.5">
               Verified diagnoses, prescribed medications, and diagnostic lab reports from your doctors.
             </p>
@@ -329,12 +298,11 @@ export default function PatientDashboard({ user, onLogout }) {
             <div key={rec.record_id} className="bg-white border border-[#EEEFFD] rounded-2xl p-6 shadow-xs space-y-4">
               <div className="flex flex-wrap justify-between items-start gap-3 border-b border-[#EEEFFD] pb-4">
                 <div>
-                  <span className="inline-block px-2.5 py-0.5 rounded-md bg-[#EEEFFD] text-[#5B65DC] text-xs font-bold font-mono mb-1">
+                  <span className="inline-block px-2.5 py-0.5 rounded-md bg-[#EEEFFD] text-[#5B65DC] text-xs font-semibold font-mono mb-1">
                     ICD-10: {rec.diagnosis_code}
                   </span>
-                  <h3 className="text-lg font-bold text-[#122056]">{rec.diagnosis_title}</h3>
-                  <p className="text-xs text-[#122056]/70 flex items-center gap-1.5 mt-0.5">
-                    <Stethoscope className="w-3.5 h-3.5 text-[#5B65DC]" />
+                  <h3 className="text-base font-semibold text-[#122056]">{rec.diagnosis_title}</h3>
+                  <p className="text-xs text-[#122056]/70 mt-0.5">
                     Consulted {rec.doctor_name} ({rec.specialization})
                   </p>
                 </div>
@@ -356,7 +324,7 @@ export default function PatientDashboard({ user, onLogout }) {
 
               {rec.prescription && (
                 <div className="bg-[#FAFAFD] border border-[#EEEFFD] rounded-xl p-4">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#5B65DC] mb-2.5">
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-[#5B65DC] mb-2.5">
                     Digital Prescription (Valid until {new Date(rec.prescription.valid_until).toLocaleDateString()})
                   </h4>
                   <ul className="space-y-2 text-sm">
@@ -379,15 +347,15 @@ export default function PatientDashboard({ user, onLogout }) {
 
               {rec.labs && rec.labs.length > 0 && (
                 <div className="bg-[#FAFAFD] border border-[#EEEFFD] rounded-xl p-4 space-y-2.5">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#5B65DC] flex items-center gap-1.5">
-                    <FlaskConical className="w-4 h-4" /> Diagnostic Lab Reports
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-[#5B65DC]">
+                    Diagnostic Lab Reports
                   </h4>
                   {rec.labs.map((lab) => (
                     <div key={lab.order_id} className="bg-white p-3.5 rounded-xl border border-[#EEEFFD] text-sm">
                       <div className="flex justify-between items-center">
-                        <span className="font-bold text-[#122056]">{lab.test_type}</span>
+                        <span className="font-semibold text-[#122056]">{lab.test_type}</span>
                         <span
-                          className={`px-2.5 py-0.5 rounded-full text-xs font-bold ${
+                          className={`px-2.5 py-0.5 rounded-full text-xs font-semibold ${
                             lab.status === 'COMPLETED'
                               ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                               : 'bg-[#EEEFFD] text-[#5B65DC]'
@@ -419,11 +387,10 @@ export default function PatientDashboard({ user, onLogout }) {
           ))}
         </section>
 
-        {/* System Activity & Audit Log */}
         {auditLogs.length > 0 && (
           <section className="bg-white border border-[#EEEFFD] rounded-2xl p-6 shadow-xs">
-            <h2 className="text-base font-bold text-[#122056] mb-3 flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-[#5B65DC]" /> Security &amp; Database Audit Activity
+            <h2 className="text-base text-[#122056] mb-3">
+              Security &amp; Database Audit Activity
             </h2>
             <div className="space-y-2 text-xs">
               {auditLogs.map((log) => (
